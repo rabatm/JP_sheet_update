@@ -1,10 +1,10 @@
-# 📅 Sheet Ville Étudiant GAS
+# 🦄 Sheet Ville Étudiant GAS
 
 Projet Google Apps Script pour automatiser l’insertion d’événements depuis un Google Sheet vers Google Calendar, avec gestion multi-projets et connexion à une API externe pour diverses mises à jour.
 
 ---
 
-## 🚀 Fonctionnalités
+## 🧩 Fonctionnalités
 
 - **Insertion automatique d’événements** (TD/CM) depuis un Google Sheet vers Google Calendar
 - **Connexion à une API externe** pour synchronisation et mises à jour complémentaires
@@ -16,7 +16,7 @@ Projet Google Apps Script pour automatiser l’insertion d’événements depuis
 
 ---
 
-## 🗂 Structure du projet
+## 🗃️ Structure du projet
 
 ```
 src/
@@ -50,7 +50,7 @@ deploy.sh                    # Script de gestion multi-projets
 
 ---
 
-## ⚙️ Configuration
+## 🛠️ Configuration
 
 1. **Copie `.env.example` en `.env`**  
    Renseigne tes IDs de scripts Apps Script et les noms de projets.
@@ -64,7 +64,7 @@ deploy.sh                    # Script de gestion multi-projets
 
 ---
 
-## 📦 Déploiement
+## 🚚 Déploiement
 
 Utilise le script `deploy.sh` pour :
 - Déployer le code sur tous les projets configurés
@@ -96,14 +96,14 @@ ERROR_EMAIL=ton.email@exemple.com
 
 ---
 
-## 📝 Auteur
+## 🧑‍🚀 Auteur
 
 Martin Celavie  
 Contact : martin.rabat@gmail.com
 
 ---
 
-## 🏁 Pour commencer
+## 🕹️ Pour commencer
 
 1. Clone le repo
 2. Configure `.env`
