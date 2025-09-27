@@ -98,7 +98,7 @@ ERROR_EMAIL=ton.email@exemple.com
 
 ## 🧑‍🚀 Auteur
 
-Martin Celavie  
+Martin Rabat
 Contact : martin.rabat@gmail.com
 
 ---
