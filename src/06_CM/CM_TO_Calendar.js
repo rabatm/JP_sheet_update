@@ -80,6 +80,6 @@ let updateCM = () => {
     }
     );
   }
-  else createTriggerUpdater('updateCM');
+  else createTrigger('updateCM');
   PropertiesService.getScriptProperties().setProperty('nextStartCM', lastRow);
 }

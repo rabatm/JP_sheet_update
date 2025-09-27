@@ -1,6 +1,6 @@
-# 📅 Projet Calendrier TD - Google Apps Script
+# 📅 Jurisperform - gestion des Google sheet de chaque villes - Apps Script
 
-Système de gestion automatisée des calendriers pour les TD avec synchronisation multi-sheets.
+Systeme de 
 
 ## 📁 Structure des fichiers
 
