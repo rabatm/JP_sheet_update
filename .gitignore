@@ -1,0 +1,20 @@
+# Environnement
+.env
+
+# Dossiers temporaires
+temp_*/
+temp_deploy/
+temp_pull/
+src_backup/
+backups/
+
+# Clasp
+.clasp.json
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+temp_*/
