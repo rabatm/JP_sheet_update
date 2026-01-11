@@ -80,12 +80,39 @@ show_config() {
     echo ""
 }
 
+# Fonction pour afficher la configuration DEV
+show_dev_config() {
+    echo -e "${YELLOW}⚙️  Configuration DEV:${NC}"
+    echo ""
+    if [ ! -z "$SCRIPT_DEV_ID_1" ] && [ "$SCRIPT_DEV_ID_1" != "YOUR_SCRIPT_DEV_ID_1" ]; then
+        echo -e "  ${GREEN}✓${NC} Projet DEV 1: $NAME_DEV_1"
+        echo -e "    ID: ${SCRIPT_DEV_ID_1:0:20}..."
+    else
+        echo -e "  ${RED}✗${NC} Projet DEV 1: Non configuré"
+    fi
+    
+    if [ ! -z "$SCRIPT_DEV_ID_2" ] && [ "$SCRIPT_DEV_ID_2" != "YOUR_SCRIPT_DEV_ID_2" ]; then
+        echo -e "  ${GREEN}✓${NC} Projet DEV 2: $NAME_DEV_2"
+        echo -e "    ID: ${SCRIPT_DEV_ID_2:0:20}..."
+    else
+        echo -e "  ${RED}✗${NC} Projet DEV 2: Non configuré"
+    fi
+    
+    if [ ! -z "$SCRIPT_DEV_ID_3" ] && [ "$SCRIPT_DEV_ID_3" != "YOUR_SCRIPT_DEV_ID_3" ]; then
+        echo -e "  ${GREEN}✓${NC} Projet DEV 3: $NAME_DEV_3"
+        echo -e "    ID: ${SCRIPT_DEV_ID_3:0:20}..."
+    else
+        echo -e "  ${RED}✗${NC} Projet DEV 3: Non configuré"
+    fi
+    echo ""
+}
+
 # Fonction de déploiement
 deploy_to_project() {
     local name=$1
     local script_id=$2
     
-    if [ "$script_id" = "YOUR_SCRIPT_ID_HERE" ] || [ -z "$script_id" ] || [ "$script_id" = "VOTRE_ID_SCRIPT_2" ] || [ "$script_id" = "VOTRE_ID_SCRIPT_3" ]; then
+    if [[ "$script_id" == *"YOUR_SCRIPT"* ]] || [ -z "$script_id" ]; then
         echo -e "${RED}❌ Script ID non configuré pour $name${NC}"
         echo -e "${YELLOW}   Éditez .env pour ajouter l'ID${NC}"
         return 1
@@ -116,7 +143,7 @@ pull_from_project() {
     local name=$1
     local script_id=$2
     
-    if [ "$script_id" = "YOUR_SCRIPT_ID_HERE" ] || [ -z "$script_id" ]; then
+    if [[ "$script_id" == *"YOUR_SCRIPT"* ]] || [ -z "$script_id" ]; then
         echo -e "${RED}❌ Script ID non configuré pour $name${NC}"
         return 1
     fi
@@ -158,12 +185,19 @@ echo -e "${CYAN}╚════════════════════�
 echo ""
 
 show_config
+show_dev_config
 
 echo -e "${GREEN}═══ Déploiement ═══${NC}"
 echo "  1) 🚀 Déployer vers TOUS les projets configurés"
 echo "  2) 📤 Déployer vers $NAME_1"
 echo "  3) 📤 Déployer vers $NAME_2"
 echo "  4) 📤 Déployer vers $NAME_3"
+echo ""
+echo -e "${YELLOW}═══ Déploiement DEV ═══${NC}"
+echo "  d) 🚀 Déployer vers TOUS les projets DEV"
+echo "  d1) 📤 Déployer vers $NAME_DEV_1"
+echo "  d2) 📤 Déployer vers $NAME_DEV_2"
+echo "  d3) 📤 Déployer vers $NAME_DEV_3"
 echo ""
 echo -e "${BLUE}═══ Récupération ═══${NC}"
 echo "  5) 📥 Récupérer depuis $NAME_1"
@@ -196,6 +230,29 @@ case $choice in
     2) deploy_to_project "$NAME_1" "$SCRIPT_ID_1" ;;
     3) deploy_to_project "$NAME_2" "$SCRIPT_ID_2" ;;
     4) deploy_to_project "$NAME_3" "$SCRIPT_ID_3" ;;
+    d|D)
+        echo -e "\n${YELLOW}⚠️  Déploiement vers tous les projets DEV configurés${NC}"
+        read -p "Confirmer? (o/n): " confirm
+        if [ "$confirm" = "o" ]; then
+            count=0
+            for i in 1 2 3; do
+                script_id_var="SCRIPT_DEV_ID_$i"
+                name_var="NAME_DEV_$i"
+                script_id="${!script_id_var}"
+                name="${!name_var}"
+                
+                if [ ! -z "$script_id" ] && [ "$script_id" != "YOUR_SCRIPT_DEV_ID_$i" ]; then
+                    if deploy_to_project "$name" "$script_id"; then
+                        ((count++))
+                    fi
+                fi
+            done
+            echo -e "\n${GREEN}🎉 $count projet(s) DEV déployé(s) avec succès!${NC}"
+        fi
+        ;;
+    d1) deploy_to_project "$NAME_DEV_1" "$SCRIPT_DEV_ID_1" ;;
+    d2) deploy_to_project "$NAME_DEV_2" "$SCRIPT_DEV_ID_2" ;;
+    d3) deploy_to_project "$NAME_DEV_3" "$SCRIPT_DEV_ID_3" ;;
     5) pull_from_project "$NAME_1" "$SCRIPT_ID_1" ;;
     6) pull_from_project "$NAME_2" "$SCRIPT_ID_2" ;;
     7) pull_from_project "$NAME_3" "$SCRIPT_ID_3" ;;
